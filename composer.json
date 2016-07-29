@@ -1,0 +1,16 @@
+{
+  "name": "trampoline-digital/acf-custom-font-icons",
+  "description": "A dependency for theme developers to use arbitrary font icons (such as Fort Awesome) with WordPress and Advanced Custom Fields",
+  "license": "GPLv3",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "Dan Green-Leipciger",
+      "email": "dan@trampolinedigital.com"
+    },
+    {
+      "name": "Trampoline Digital",
+      "homepage": "http://trampolinedigital.com"
+    }
+  ]
+}
