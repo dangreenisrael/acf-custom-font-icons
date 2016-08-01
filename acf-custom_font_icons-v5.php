@@ -72,16 +72,18 @@ class acf_field_custom_font_icons extends acf_field {
 	 */
 	public function get_css_class_list($icons_file, $class_prefix) {
 
-		function array_delete($array, $element) {
-			return (is_array($element)) ? array_values(array_diff($array, $element)) : array_values(array_diff($array, array($element)));
-		}
+
 
 		$parsed_file = file_get_contents($icons_file);
 		preg_match_all("/$class_prefix\-([a-zA-z0-9\-]+[^\:\.\,\s])/", $parsed_file, $matches);
 		$exclude_icons = array("fa-lg", "fa-2x", "fa-3x", "fa-4x", "fa-5x", "fa-ul", "fa-li", "fa-fw", "fa-border", "fa-pulse", "fa-rotate-90", "fa-rotate-180", "fa-rotate-270", "fa-spin", "fa-flip-horizontal", "fa-flip-vertical", "fa-stack", "fa-stack-1x", "fa-stack-2x", "fa-inverse", "fa-lg{", "fa-2x{", "fa-3x{", "fa-4x{", "fa-5x{", "fa-ul{", "fa-li{", "fa-fw{", "fa-border{", "fa-pulse{", "fa-rotate-90{", "fa-rotate-180{", "fa-rotate-270{", "fa-spin{", "fa-flip-horizontal{", "fa-flip-vertical{", "fa-stack{", "fa-stack-1x{", "fa-stack-2x{", "fa-inverse{", "fa-pull-left", "fa-pull-left{", "fa-pull-right", "fa-pull-right{", "fa-ul>");
-		$icons = array_delete($matches[0], $exclude_icons);
+		$icons = $this->array_delete($matches[0], $exclude_icons);
 		sort($icons);
 		return $icons;
+	}
+
+	function array_delete($array, $element) {
+		return (is_array($element)) ? array_values(array_diff($array, $element)) : array_values(array_diff($array, array($element)));
 	}
 
 	/**
@@ -132,10 +134,10 @@ class acf_field_custom_font_icons extends acf_field {
 			$class_prefix = $field['class_prefix'];
 		}
 
-		$icons_file = get_stylesheet_directory()."/" .$field['relative_path'];
+		$icons_file = get_stylesheet_directory_uri()."/" .$field['relative_path'];
 		$icons_url = get_stylesheet_directory_uri()."/" .$field['relative_path'];
 		if (!is_file($icons_file)){
-			$icons_file = get_template_directory()."/" .$field['relative_path'];
+			$icons_file = get_template_directory_uri()."/" .$field['relative_path'];
 			$icons_url = get_template_directory_uri()."/" .$field['relative_path'];
 		}
 
