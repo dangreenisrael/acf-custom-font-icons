@@ -145,6 +145,7 @@ class acf_field_custom_font_icons extends acf_field {
 			echo '<pre style="color:red;">YOU NEED TO CHOOSE A PATH FOR THE FILES!!!</pre>';
 		} else{
 			$font_classes = $this->get_css_class_list($icons_file,$class_prefix);
+			$font_classes = array_unique($font_classes);
 			?>
 			<script>
 				jQuery('head').append('<link rel="stylesheet" type="text/css" href="<?php echo $icons_url ?>">');
