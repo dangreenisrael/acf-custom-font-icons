@@ -178,18 +178,26 @@ class acf_field_custom_font_icons extends acf_field {
 	*
 	*/
 	function input_admin_enqueue_scripts() {
-
 		// vars
 		$url     = $this->settings['url'];
 		$version = $this->settings['version'];
 
-		// register & include JS
+		print_r("hello $url\n");
+		$active_directory = basename(get_template_directory());
+		$stylesheet_directory_name = basename(get_stylesheet_directory());
+		if (strpos($stylesheet_directory_name, 'child') !== false) {
+			$active_directory = $stylesheet_directory_name;
+		}
 
-		wp_register_script( 'acf-input-custom_font_icons', "{$url}assets/js/input.js", array( 'acf-input', 'jquery' ), $version );
+		$script_base_url = get_theme_root_uri()."/".strstr(__DIR__, $active_directory);;
+
+
+		// register & include JS
+		wp_register_script( 'acf-input-custom_font_icons', "{$script_base_url}/assets/js/input.js", array( 'acf-input', 'jquery' ), $version );
 		wp_enqueue_script( 'acf-input-custom_font_icons' );
 
 		// register & include CSS
-		wp_register_style( 'acf-input-custom_font_icons', "{$url}assets/css/input.css", array( 'acf-input' ), $version );
+		wp_register_style( 'acf-input-custom_font_icons', "{$script_base_url}/assets/css/input.css", array( 'acf-input' ), $version );
 		wp_enqueue_style( 'acf-input-custom_font_icons' );
 
 	}
